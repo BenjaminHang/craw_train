@@ -10,228 +10,6 @@ from json import *
 
 
 
-#train_info = craw_result.json()['data']['result'][j].split('|')
-#train_info : [3]:车次         [4]:该车次始发站代号  [5]:该车次终点站代号  [6]:本次查询出发站代号  
-#             [7]:本次查询到达站 [8]:出发时间        [9]:到达时间         [10]:是否有票       [11]:???
-#                      
-#去哪网数据结构: 
-'''
-    {
-	    "ret": true,
-	    "data": {
-	        "flag": true,
-	        "errorCode": 0,
-	        "dptStation": "北京",
-	        "arrStation": "汤旺河",
-	        "dptDate": "2017-06-20",
-	        "s2sBeanList": [],
-	        "updateTs": 1496082033,
-	        "status": "UNKNOWN",
-	        "dptCity": "北京",
-	        "arrCity": "汤旺河",
-	        "dptCityFullPy": "beijing",
-	        "arrCityFullPy": "tangwanghe",
-	        "transfer": false,
-	        "wwwRobTicketMaxTaskNum": 20,
-	        "wwwRobTicketWarmTip": "继续添加备选方案，大大提升成功率!",
-	        "wwwRobTicketMaxTaskWarn": "您已选择20种抢票方案，无法继续添加",
-	        "robPeriod": 30,
-	        "subscribePeriod": 10,
-	        "extraData": {},
-	        "searchType": 0,
-	        "trainSearchType": 1,
-	        "recommendTrainJoint": 0,
-	        "sameCity": false
-	    },
-	    "errmsg": "请求成功",
-	    "errcode": 0
-	}
-	{
-    'seats': {
-        '无座': {
-            'price': 198,
-            'count': 100,
-            'enable': True,
-            'seatMap': {
-                'ticketNumStatus': 2
-            }
-        },
-        '硬座': {
-            'price': 198,
-            'count': 100,
-            'enable': True,
-            'seatMap': {
-                'ticketNumStatus': 2
-            }
-        },
-        '硬卧': {
-            'price': 337,
-            'count': 5,
-            'enable': True,
-            'seatMap': {
-                'ticketNumStatus': 1
-            }
-        },
-        '软卧': {
-            'price': 530,
-            'count': 2,
-            'enable': True,
-            'seatMap': {
-                'ticketNumStatus': 1
-            }
-        }
-    },
-    'trainNo': 'T9',
-    'trainCode': '24000000T90S',
-    'dptStationName': '北京西',
-    'arrStationName': '万源',
-    'dptStationCode': 'BXP',
-    'arrStationCode': 'WYY',
-    'dptStationNo': '01',
-    'arrStationNo': '11',
-    'startStationName': '北京西',
-    'endStationName': '重庆北',
-    'startStationCode': 'BXP',
-    'endStationCode': 'CUW',
-    'startDate': '20170620',
-    'dptTime': '15: 05',
-    'arrTime': '11: 21',
-    'dayDifference': '1',
-    'lishiValue': '1216',
-    'locationCode': 'P4',
-    'saleTime': '10: 00',
-    'seatTypes': '1413',
-    'controlFlag': '0',
-    'controlMsg': '23: 00-06: 00系统维护时间',
-    'presaleDay': 0,
-    'robPeriod': 0,
-    'subscribePeriod': 0,
-    'timeDim': 12,
-    'noteDim': 34,
-    'ypDim': 21,
-    'saleStatus': {
-        'saleId': 12,
-        'desc': '可预订'
-    },
-    'extraBeanMap': {
-        'arrDate': '2017-06-21',
-        'intervalMiles': 2837,
-        'sort': 0,
-        'interval': '20小时16分',
-        'deptStationInfo': True,
-        'dptCityName': '北京',
-        'deptTimeRange': '下午',
-        'sale': 21,
-        'startSaleTime': '2017-05-2210: 00',
-        'ticketType': '硬座,
-        硬卧,
-        无座,
-        软卧',
-        'ticketsUnknown': False,
-        'arriTimeRange': '上午',
-        'dptDate': '2017-06-20',
-        'arriStationInfo': False,
-        'trainType': '空调特快',
-        'arrCityName': '万源',
-        'stationType': '始发,
-        过路',
-        'tickets': 207
-    }
-},
-{
-    'seats': {
-        '无座': {
-            'price': 198,
-            'count': 100,
-            'enable': True,
-            'seatMap': {
-                'ticketNumStatus': 2
-            }
-        },
-        '硬座': {
-            'price': 198,
-            'count': 100,
-            'enable': True,
-            'seatMap': {
-                'ticketNumStatus': 2
-            }
-        },
-        '硬卧': {
-            'price': 337,
-            'count': 100,
-            'enable': True,
-            'seatMap': {
-                'ticketNumStatus': 2
-            }
-        },
-        '软卧': {
-            'price': 530,
-            'count': 13,
-            'enable': True,
-            'seatMap': {
-                'ticketNumStatus': 1
-            }
-        }
-    },
-    'trainNo': 'K507',
-    'trainCode': '240000K50726',
-    'dptStationName': '北京西',
-    'arrStationName': '万源',
-    'dptStationCode': 'BXP',
-    'arrStationCode': 'WYY',
-    'dptStationNo': '01',
-    'arrStationNo': '21',
-    'startStationName': '北京西',
-    'endStationName': '贵阳',
-    'startStationCode': 'BXP',
-    'endStationCode': 'GIW',
-    'startDate': '20170620',
-    'dptTime': '21: 23',
-    'arrTime': '19: 57',
-    'dayDifference': '1',
-    'lishiValue': '1354',
-    'locationCode': 'PB',
-    'saleTime': '10: 00',
-    'seatTypes': '1413',
-    'controlFlag': '0',
-    'controlMsg': '23: 00-06: 00系统维护时间',
-    'presaleDay': 0,
-    'robPeriod': 0,
-    'subscribePeriod': 0,
-    'timeDim': 12,
-    'noteDim': 34,
-    'ypDim': 21,
-    'saleStatus': {
-        'saleId': 12,
-        'desc': '可预订'
-    },
-    'extraBeanMap': {
-        'arrDate': '2017-06-21',
-        'intervalMiles': 2708,
-        'sort': 1,
-        'interval': '22小时34分',
-        'deptStationInfo': True,
-        'dptCityName': '北京',
-        'deptTimeRange': '晚上',
-        'sale': 21,
-        'startSaleTime': '2017-05-2210: 00',
-        'ticketType': '硬座,
-        硬卧,
-        无座,
-        软卧',
-        'ticketsUnknown': False,
-        'arriTimeRange': '晚上',
-        'dptDate': '2017-06-20',
-        'arriStationInfo': False,
-        'trainType': '快速',
-        'arrCityName': '万源',
-        'stationType': '始发,
-        过路',
-        'tickets': 313
-    }
-}
-'''
-
 #测试并行效率
 def crawtest(step, proxy, urlquery, isproxy):
     #global log1,log2
@@ -448,30 +226,29 @@ log3.close()
 start_time=time.time()
 
 testUrl = "http://train.qunar.com/dict/open/s2s.do?"+\
-        "callback=jQuery172031843804203989556_1495894108865&"+\
-        "dptStation=上海&arrStation=北京&date=2017-05-31&"+\
+        "callback=jQuery17204028351541153141_1508679375674&"+\
+        "dptStation=上海&arrStation=北京&date=2017-11-11&"+\
         "type=normal&user=neibu&source=site&start=1&num=500&sort=3"
 
 client = MongoClient()
 db = client.quna
 myutil = mymod.myutil.myUtil(db)
-# myutil.putUrl2Mongo(372,392,2638,"2017-06-20")
-#myutil.updateMongo("restart")
+myutil.updateMongo("restart")
 lock = threading.Lock()
 stableip = mymod.stableIP.StableIP()
 proxies = stableip.getIPs("ip1.py")
 #craw(100,proxies[0],0)
-#测试多线程速度
 def callcraw(step, proxy, urlquery_step):
     if stableip.singleTest(proxy,testUrl):
-        craw(step, proxy, urlquery_step, 1)
+        craw(step, proxy, urlquery_step, 0)
     else:
         print("无效ip")
         print(proxy["http"])
         pass
 
-step = 1000
+step = 10
 urlquery = list(db.url.find({"status":"no"}).limit(step*len(proxies)))
+
 #for i in range(0, step*len(proxies)):
 #    db.url.update({"_id":urlquery[i]["_id"]},{"$set":{"status":"ing"}},upsert=False, multi=False)
 
@@ -482,8 +259,12 @@ for proxy in proxies:
     start = (thread_num - 1)*step
     end =(thread_num)*step
     urlquery_step = urlquery[start:end]
+
+    '''
+    過期之後修改日期
     for oneUrl in urlquery_step:
         oneUrl["url"] = oneUrl["url"].replace("2017-06-20","2017-07-26")
+    '''
     onethread = threading.Thread(target = callcraw,args=([step,proxy,urlquery_step]),name = "name:"+str(thread_num))
     onethread.start()
     #threads.append(onethread)
@@ -502,21 +283,6 @@ for proxy in proxies:
 
 #'''
 #######主函数结束
-
-
-
-
-''' 
-#初始化数据库
-for i in range(1,261):
-	print(i)
-	start = (i-1)*10
-	end = i*10-1
-	scale = 2638
-	threading.Thread(target = putUrl2Mongo, args = ([start,end,scale]), name = i).start() 
-
-'''  
-
 
 
 

@@ -55,10 +55,10 @@ class myUtil():
 	#query = {"leftTicketDTO.train_date":"2017-05-24",\
 	#"leftTicketDTO.from_station":"BJP","leftTicketDTO.to_station":"SHH","purpose_codes":"ADULT"}
 		commonUrl = "http://train.qunar.com/dict/open/s2s.do?"
-		query = {"callback":"jQuery172031843804203989556_1495894108865",\
+		query = {"callback":"jQuery17204028351541153141_1508679375674",\
 		"dptStation":"北京",\
 		"arrStation":"南京",\
-		"date":"2017-05-29",\
+		"date":"2017-11-29",\
 		"type":"normal",\
 		"user":"neibu",\
 		"source":"site",\
