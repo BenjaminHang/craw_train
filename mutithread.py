@@ -50,13 +50,16 @@ def craw(step, proxy, urlquery, isproxy):
     for i in range(0,step):
         try:
             if isproxy == 1:
+                
+                print(urlquery[i]["url"])
                 craw_result = requests.get(urlquery[i]["url"],proxies=proxy,headers=headers,verify=False)
             else:
-                craw_result = requests.get(urlquery[i]["url"],headers=headers,verify=False)
+                craw_result = requests.get(urlquery[i]["url"],headers=headers,verify=False)   
+
             if craw_result.status_code==200:
                 http_ok = http_ok + 1
 				#必有正则表达式代替如此傻逼的写法
-                result = craw_result.text.replace("/**/jQuery172031843804203989556_1495894108865","")
+                result = craw_result.text.replace("/**/jQuery17204028351541153141_1508679375674","")
                 result = result.replace("(","")
                 result = result.replace(")","")
                 result = result.replace(";","")
@@ -64,6 +67,7 @@ def craw(step, proxy, urlquery, isproxy):
                 result = JSONDecoder().decode(str(result))
 				#有车次
                 if len(result['data']['s2sBeanList']):
+
                     # print(urlquery[i]["url"])
                     for train in range(0,len(result['data']['s2sBeanList'])):
                         num=result['data']['s2sBeanList'][train]["trainNo"]
@@ -88,7 +92,8 @@ def craw(step, proxy, urlquery, isproxy):
                         "intervalmiles":intervalmiles,"seats":seatdic}
                         ##本函数更新数据库
                         ##part1
-                        #print(dbdata)
+                        print("有用的数据")
+                        print(dbdata)
                         db.trainmap.insert_one(dbdata)
                         db.url.update({"_id":urlquery[i]["_id"]},{"$set":{"status":"hasdata"}},upsert=False,multi=False)
                         #train_data = ?????@@@于佳龙
@@ -107,11 +112,11 @@ def craw(step, proxy, urlquery, isproxy):
                 print(threadname+"@@@@"+str(craw_result.status_code))
         #request.get出错
         except Exception as e:
-            print("sigleTest通过但线程网络请求出错"+threadname+str(e)+'\n')
+            # print("sigleTest通过但线程网络请求出错"+threadname+str(e)+'\n')
             #log2.write("sigleTest通过但线程网络请求出错"+threadname+str(e)+'\n')
             break
             pass
-    print("the thread is over"+threadname+'\n'+'len(http_ok)='+str(http_ok)+'\t'+'len(http_notok)='+str(http_notok)+'\n')
+    # print("the thread is over"+threadname+'\n'+'len(http_ok)='+str(http_ok)+'\t'+'len(http_notok)='+str(http_notok)+'\n')
 
 
 
@@ -240,14 +245,15 @@ proxies = stableip.getIPs("ip1.py")
 #craw(100,proxies[0],0)
 def callcraw(step, proxy, urlquery_step):
     if stableip.singleTest(proxy,testUrl):
-        craw(step, proxy, urlquery_step, 0)
+        
+        craw(step, proxy, urlquery_step, 1)
     else:
         print("无效ip")
         print(proxy["http"])
         pass
 
-step = 10
-urlquery = list(db.url.find({"status":"no"}).limit(step*len(proxies)))
+step = 20
+urlquery = list(db.url.find({"status":"no","from":"北京"}).limit(step*len(proxies)))
 
 #for i in range(0, step*len(proxies)):
 #    db.url.update({"_id":urlquery[i]["_id"]},{"$set":{"status":"ing"}},upsert=False, multi=False)
@@ -260,11 +266,11 @@ for proxy in proxies:
     end =(thread_num)*step
     urlquery_step = urlquery[start:end]
 
-    '''
-    過期之後修改日期
-    for oneUrl in urlquery_step:
-        oneUrl["url"] = oneUrl["url"].replace("2017-06-20","2017-07-26")
-    '''
+    
+    #過期之後修改日期
+    # for oneUrl in urlquery_step:
+    #     oneUrl["url"] = oneUrl["url"].replace("2017-06-20","2017-11-26")
+
     onethread = threading.Thread(target = callcraw,args=([step,proxy,urlquery_step]),name = "name:"+str(thread_num))
     onethread.start()
     #threads.append(onethread)

@@ -49,8 +49,8 @@ class StableIP():
 	
 	def singleTest(self,proxy,testUrl):
 		testUrl = "http://train.qunar.com/dict/open/s2s.do?"+\
-		"callback=jQuery172031843804203989556_1495894108865&"+\
-		"dptStation=上海&arrStation=北京&date=2017-06-01&"+\
+		"callback=jQuery17204028351541153141_1508679375674&"+\
+		"dptStation=上海&arrStation=北京&date=2017-11-26&"+\
 		"type=normal&user=neibu&source=site&start=1&num=500&sort=3"
 		try:
 			response = requests.get(testUrl,proxies=proxy,verify=False,timeout=60)
